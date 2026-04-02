@@ -1,0 +1,39 @@
+# Variables & Constants
+
+## ENV
+
+PORT=5000
+MONGO_URI=
+JWT_SECRET=
+
+---
+
+## Roles
+
+USER
+EXPERT
+ADMIN
+
+---
+
+## Issue Severity
+
+LOW
+MEDIUM
+HIGH
+CRITICAL
+
+---
+
+## Article Status
+
+PENDING
+APPROVED
+
+---
+
+## AI Output
+
+RECOMMENDED_TECHNIQUES
+RELATED_ARTICLES
+REGIONAL_SOLUTIONS
