@@ -62,6 +62,8 @@ Aquaveda is a geo-intelligent water conservation platform combining knowledge sh
 - Backend bootstrap added with health route and DB connector
 - Frontend bootstrap added with Vite shell and basic routes
 - Env example files added for server, client, and AI service
+- Server runtime validated with local MongoDB URI and successful connection
+- Auth foundation started: user model added, register and login endpoints live under /api/v1/auth
 
 ---
 
@@ -77,6 +79,30 @@ Frontend -> Backend -> DB -> AI Layer -> Map Layer
 - Upgrade-ready systems
 - Documentation-first development
 - Real-world impact focus
+
+---
+
+## Feature Transfer Checklist (from CyberShield)
+
+### Adopted for Phase 1
+
+- Backend auth and RBAC skeleton
+- Middleware layering for JWT and role protection
+- Env-driven configuration and example env workflow
+- Documentation-first flow using context, todo, logs, and bugs
+
+### Planned to Adopt Next
+
+- Frontend route and layout shell
+- Centralized API service wrapper
+- Input sanitization helpers and global security middleware layering
+- Error boundary and API error middleware alignment
+
+### Explicitly Not Transferred
+
+- Phishing game and cyber-threat specific product logic
+- CyberShield report, meme, and video moderation domain workflows
+- Wallet or coin economy rules unless Aquaveda later enables gamification
 
 ---
 

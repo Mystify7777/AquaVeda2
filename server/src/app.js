@@ -3,6 +3,7 @@ import cors from "cors";
 import morgan from "morgan";
 
 import healthRoutes from "./routes/healthRoutes.js";
+import authRoutes from "./modules/auth/auth.routes.js";
 import { notFound } from "./middlewares/notFound.js";
 import { errorHandler } from "./middlewares/errorHandler.js";
 
@@ -17,6 +18,7 @@ app.use(express.json());
 app.use(morgan("dev"));
 
 app.use("/api/health", healthRoutes);
+app.use("/api/v1/auth", authRoutes);
 
 app.get("/", (req, res) => {
   res.json({ message: "Aquaveda API is running" });
