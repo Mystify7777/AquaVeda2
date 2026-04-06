@@ -18,6 +18,40 @@ export const approveArticle = async (id, expertId) => {
       status: "APPROVED",
       verifiedBy: expertId
     },
-    { new: true }
+    { returnDocument: "after" }
   );
+};
+
+export const updateArticle = async (id, data, userId) => {
+  const article = await Wiki.findById(id);
+
+  if (!article) {
+    throw new Error("Article not found");
+  }
+
+  if (article.author.toString() !== userId) {
+    throw new Error("Not authorized");
+  }
+
+  if (article.status === "APPROVED") {
+    throw new Error("Approved articles cannot be edited");
+  }
+
+  Object.assign(article, data);
+  return article.save();
+};
+
+export const rejectArticle = async (id) => {
+  return Wiki.findByIdAndUpdate(
+    id,
+    {
+      status: "PENDING",
+      verifiedBy: null
+    },
+    { returnDocument: "after" }
+  );
+};
+
+export const getUserArticles = async (userId) => {
+  return Wiki.find({ author: userId }).sort({ createdAt: -1 });
 };

@@ -10,9 +10,11 @@
 ## 🌊 PHASE 2 — WIKI SYSTEM
 
 - [x] Article model
-- [x] Create article (edit pending)
+- [x] Create or edit article
 - [x] Approval system
 - [x] Expert verification
+- [x] Ownership checks
+- [x] User article view
 
 ## 🌍 PHASE 3 — GEO ISSUES
 
@@ -87,16 +89,17 @@ Goal: ship first useful knowledge workflow with moderation hooks.
 
 - [ ] Article model (title, body, tags, region, status, author)
 - [x] Create draft article endpoint
-- [ ] Edit draft article endpoint
+- [x] Edit draft article endpoint
 - [ ] Submit for review endpoint
 - [x] Approve endpoint (EXPERT/ADMIN)
-- [ ] Reject endpoint (EXPERT/ADMIN)
+- [x] Reject endpoint (EXPERT/ADMIN)
 - [ ] Client pages for article list, detail, create/edit
+- [x] User article view endpoint (/mine)
 
 Exit criteria:
 
-- [ ] USER can create and edit own draft
-- [ ] EXPERT/ADMIN can approve or reject
+- [x] USER can create and edit own draft
+- [x] EXPERT/ADMIN can approve or reject
 - [x] Only approved articles appear publicly
 
 ### Sprint 3 - Geo Issues MVP
