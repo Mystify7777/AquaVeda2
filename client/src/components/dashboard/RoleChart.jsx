@@ -37,6 +37,18 @@ export default function RoleChart({ data }) {
           </PieChart>
         </ResponsiveContainer>
       </div>
+      <div className="chart-legend" aria-label="Role distribution legend">
+        {chartData.map((entry, index) => (
+          <span key={entry.name} className="chart-legend-item">
+            <span
+              className="chart-legend-dot"
+              style={{ backgroundColor: COLORS[index % COLORS.length] }}
+              aria-hidden="true"
+            />
+            {entry.name}: {entry.value}
+          </span>
+        ))}
+      </div>
     </div>
   );
 }

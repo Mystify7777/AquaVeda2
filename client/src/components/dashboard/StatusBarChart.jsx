@@ -1,5 +1,8 @@
 import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 
+const ISSUE_STATUS_ORDER = ["OPEN", "IN_PROGRESS", "RESOLVED"];
+const PROJECT_STATUS_ORDER = ["ACTIVE", "COMPLETED"];
+
 const normalizeData = (data = []) => {
   if (!Array.isArray(data)) {
     return [];
@@ -11,8 +14,24 @@ const normalizeData = (data = []) => {
   }));
 };
 
+const orderData = (data, title = "") => {
+  const sourceOrder = title.toLowerCase().includes("issue") ? ISSUE_STATUS_ORDER : PROJECT_STATUS_ORDER;
+  const orderMap = new Map(sourceOrder.map((name, index) => [name, index]));
+
+  return [...data].sort((a, b) => {
+    const left = orderMap.has(a.name) ? orderMap.get(a.name) : Number.MAX_SAFE_INTEGER;
+    const right = orderMap.has(b.name) ? orderMap.get(b.name) : Number.MAX_SAFE_INTEGER;
+
+    if (left !== right) {
+      return left - right;
+    }
+
+    return a.name.localeCompare(b.name);
+  });
+};
+
 export default function StatusBarChart({ title, data }) {
-  const chartData = normalizeData(data);
+  const chartData = orderData(normalizeData(data), title);
 
   if (chartData.length === 0) {
     return (
@@ -36,6 +55,14 @@ export default function StatusBarChart({ title, data }) {
             <Bar dataKey="count" fill="#0f766e" radius={[6, 6, 0, 0]} />
           </BarChart>
         </ResponsiveContainer>
+      </div>
+      <div className="chart-legend" aria-label={`${title} legend`}>
+        {chartData.map((item) => (
+          <span key={item.name} className="chart-legend-item">
+            <span className="chart-legend-dot" aria-hidden="true" />
+            {item.name}: {item.count}
+          </span>
+        ))}
       </div>
     </div>
   );
