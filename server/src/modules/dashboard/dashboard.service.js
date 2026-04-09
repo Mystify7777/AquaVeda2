@@ -1,4 +1,3 @@
-import Comment from "../comments/comment.model.js";
 import Issue from "../issues/issue.model.js";
 import Project from "../projects/project.model.js";
 import User from "../users/user.model.js";
@@ -43,36 +42,38 @@ export const getAdminDashboardStats = async () => {
   const [
     totalUsers,
     totalIssues,
-    openIssues,
-    inProgressIssues,
-    resolvedIssues,
-    totalWikiArticles,
     pendingWikiArticles,
-    approvedWikiArticles,
     totalProjects,
-    activeProjects,
-    completedProjects,
-    totalComments,
-    usersByRole,
+    roleSplit,
+    issueStatus,
+    projectStatus,
     recentIssues,
     recentProjects
   ] = await Promise.all([
     User.countDocuments(),
     Issue.countDocuments(),
-    Issue.countDocuments({ status: "OPEN" }),
-    Issue.countDocuments({ status: "IN_PROGRESS" }),
-    Issue.countDocuments({ status: "RESOLVED" }),
-    Wiki.countDocuments(),
     Wiki.countDocuments({ status: "PENDING" }),
-    Wiki.countDocuments({ status: "APPROVED" }),
     Project.countDocuments(),
-    Project.countDocuments({ status: "ACTIVE" }),
-    Project.countDocuments({ status: "COMPLETED" }),
-    Comment.countDocuments(),
     User.aggregate([
       {
         $group: {
           _id: "$role",
+          count: { $sum: 1 }
+        }
+      }
+    ]),
+    Issue.aggregate([
+      {
+        $group: {
+          _id: "$status",
+          count: { $sum: 1 }
+        }
+      }
+    ]),
+    Project.aggregate([
+      {
+        $group: {
+          _id: "$status",
           count: { $sum: 1 }
         }
       }
@@ -86,34 +87,13 @@ export const getAdminDashboardStats = async () => {
   ]);
 
   return {
-    stats: {
-      users: {
-        total: totalUsers,
-        byRole: usersByRole.reduce((acc, item) => {
-          acc[item._id] = item.count;
-          return acc;
-        }, {})
-      },
-      issues: {
-        total: totalIssues,
-        open: openIssues,
-        inProgress: inProgressIssues,
-        resolved: resolvedIssues
-      },
-      wiki: {
-        total: totalWikiArticles,
-        pending: pendingWikiArticles,
-        approved: approvedWikiArticles
-      },
-      projects: {
-        total: totalProjects,
-        active: activeProjects,
-        completed: completedProjects
-      },
-      comments: {
-        total: totalComments
-      }
-    },
+    users: totalUsers,
+    issues: totalIssues,
+    projects: totalProjects,
+    pendingArticles: pendingWikiArticles,
+    roleSplit,
+    issueStatus,
+    projectStatus,
     recent: {
       issues: recentIssues,
       projects: recentProjects

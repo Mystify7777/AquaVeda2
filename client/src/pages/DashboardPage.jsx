@@ -1,4 +1,6 @@
 import { useMemo, useState } from "react";
+import RoleChart from "../components/dashboard/RoleChart.jsx";
+import StatusBarChart from "../components/dashboard/StatusBarChart.jsx";
 import { getAdminDashboard, getUserDashboard } from "../services/api.js";
 
 const tokenStorageKey = "token";
@@ -36,24 +38,15 @@ export default function DashboardPage() {
   }, [dashboard]);
 
   const adminCards = useMemo(() => {
-    if (!dashboard?.stats) {
+    if (!dashboard) {
       return [];
     }
 
-    const { users, issues, wiki, projects, comments } = dashboard.stats;
-
     return [
-      { label: "Users", value: users.total },
-      { label: "Issues", value: issues.total },
-      { label: "Open Issues", value: issues.open },
-      { label: "In Progress", value: issues.inProgress },
-      { label: "Resolved", value: issues.resolved },
-      { label: "Wiki Articles", value: wiki.total },
-      { label: "Wiki Pending", value: wiki.pending },
-      { label: "Projects", value: projects.total },
-      { label: "Active Projects", value: projects.active },
-      { label: "Completed Projects", value: projects.completed },
-      { label: "Comments", value: comments.total }
+      { label: "Users", value: dashboard.users ?? 0 },
+      { label: "Issues", value: dashboard.issues ?? 0 },
+      { label: "Projects", value: dashboard.projects ?? 0 },
+      { label: "Pending Articles", value: dashboard.pendingArticles ?? 0 }
     ];
   }, [dashboard]);
 
@@ -131,8 +124,12 @@ export default function DashboardPage() {
 
       {dashboard && mode === "admin" ? (
         <section className="dashboard-extra">
-          <h2>User Roles</h2>
-          <pre>{JSON.stringify(dashboard.stats.users.byRole, null, 2)}</pre>
+          <h2>Analytics Overview</h2>
+          <div className="charts">
+            <RoleChart data={dashboard.roleSplit} />
+            <StatusBarChart title="Issue Status Distribution" data={dashboard.issueStatus} />
+            <StatusBarChart title="Project Progress Overview" data={dashboard.projectStatus} />
+          </div>
         </section>
       ) : null}
     </main>
