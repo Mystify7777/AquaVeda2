@@ -14,6 +14,9 @@ import { errorHandler } from "./middlewares/error.middleware.js";
 
 const app = express();
 
+// Render runs behind a proxy; trust first hop for correct client IP handling.
+app.set("trust proxy", 1);
+
 app.use(
   cors({
     origin: process.env.CLIENT_URL || "http://localhost:3000"
