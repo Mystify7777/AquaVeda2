@@ -36,8 +36,8 @@
 
 ## 📊 PHASE 6 — DASHBOARD
 
-- [ ] User dashboard
-- [ ] Admin dashboard
+- [x] User dashboard
+- [x] Admin dashboard
 
 ## 🏗️ PHASE 7 — PROJECTS
 
@@ -150,8 +150,8 @@ Exit criteria:
 
 Goal: complete impact loops and harden for release.
 
-- [ ] User dashboard metrics
-- [ ] Admin dashboard analytics
+- [x] User dashboard metrics
+- [x] Admin dashboard analytics
 - [ ] Project model + join/leave + progress updates
 - [ ] XP/badges basics tied to contributions
 - [ ] API and UI tests for critical paths

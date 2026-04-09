@@ -15,6 +15,7 @@ The current implementation includes:
 - Rule-based AI recommendations
 - Comment threads for issue discussions
 - Collaborative projects with contributors and progress tracking
+- User and admin dashboards for product visibility
 
 ## Architecture
 
@@ -29,6 +30,7 @@ Frontend -> Backend API -> MongoDB -> AI Layer -> Map Layer
 - AI: rule-based recommendation engine for issue guidance
 - Community: comments and threaded replies
 - Projects: collaboration layer for turning issues into action
+- Dashboard: user impact metrics and admin-wide analytics
 
 ## Tech Stack
 
@@ -144,6 +146,11 @@ AquaVeda/
 - `POST /api/v1/projects/:id/join`
 - `PATCH /api/v1/projects/:id/progress`
 
+### Dashboard
+
+- `GET /api/v1/dashboard/user`
+- `GET /api/v1/dashboard/admin`
+
 ## Setup
 
 ### Prerequisites
@@ -240,7 +247,7 @@ GEMINI_API_KEY=your_api_key_here
 
 ## Status
 
-AquaVeda currently includes the complete core system: auth, moderated wiki, geo issues, map visualization, AI suggestions, community discussions, and projects.
+AquaVeda currently includes the complete core system with hardening and dashboard visibility: auth, moderated wiki, geo issues, map visualization, AI suggestions, community discussions, projects, and user/admin dashboards.
 
 ## Author
 

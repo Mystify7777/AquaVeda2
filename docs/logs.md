@@ -30,3 +30,4 @@
 [2026-04-07] - Docs - Rewrote AquaVeda README with structured overview, setup, architecture, API, and future scope
 [2026-04-10] - Hardening - Added centralized route validation (Zod), reusable pagination, and env-based CORS allowlist handling
 [2026-04-10] - Hardening - Added global plus auth-specific rate limiting and validated invalid input, pagination, rate-limit, CORS, and nearby geo flows
+[2026-04-10] - Dashboard - Implemented user and admin dashboard APIs plus frontend dashboard page with token-based mode switch and stat cards

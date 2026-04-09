@@ -53,4 +53,28 @@ export const createComment = async (payload, token) => {
 	});
 };
 
+export const getUserDashboard = async (token) => {
+	if (!token) {
+		throw new Error("Login required to view dashboard");
+	}
+
+	return fetchJson(`${API_URL}/v1/dashboard/user`, {
+		headers: {
+			Authorization: `Bearer ${token}`
+		}
+	});
+};
+
+export const getAdminDashboard = async (token) => {
+	if (!token) {
+		throw new Error("Admin token required to view admin dashboard");
+	}
+
+	return fetchJson(`${API_URL}/v1/dashboard/admin`, {
+		headers: {
+			Authorization: `Bearer ${token}`
+		}
+	});
+};
+
 export default API_URL;
