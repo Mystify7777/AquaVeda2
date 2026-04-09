@@ -29,6 +29,38 @@ export const getIssueMapData = async (filters = {}) => {
 	return fetchJson(endpoint);
 };
 
+export const registerUser = async (body) => {
+	return fetchJson(`${API_URL}/v1/auth/register`, {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json"
+		},
+		body: JSON.stringify(body)
+	});
+};
+
+export const loginUser = async (credentials) => {
+	return fetchJson(`${API_URL}/v1/auth/login`, {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json"
+		},
+		body: JSON.stringify(credentials)
+	});
+};
+
+export const getCurrentUser = async (token) => {
+	if (!token) {
+		throw new Error("Login required");
+	}
+
+	return fetchJson(`${API_URL}/v1/auth/me`, {
+		headers: {
+			Authorization: `Bearer ${token}`
+		}
+	});
+};
+
 export const getIssueRecommendations = async (issueId) => {
 	return fetchJson(`${API_URL}/v1/ai/recommend/${issueId}`);
 };

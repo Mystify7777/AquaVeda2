@@ -1,30 +1,29 @@
 import { Suspense, lazy } from "react";
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes, useLocation } from "react-router-dom";
+import { useAuth } from "./contexts/AuthContext.jsx";
+import MainLayout from "./layouts/MainLayout.jsx";
+import ActPage from "./pages/ActPage.jsx";
+import CommunityPage from "./pages/CommunityPage.jsx";
 import IssueMapPage from "./pages/IssueMapPage.jsx";
+import LearnPage from "./pages/LearnPage.jsx";
+import LoginPage from "./pages/LoginPage.jsx";
+import RegisterPage from "./pages/RegisterPage.jsx";
 
 const DashboardPage = lazy(() => import("./pages/DashboardPage.jsx"));
 
-function Home() {
-  return (
-    <main style={{ fontFamily: "system-ui, sans-serif", padding: "2rem" }}>
-      <h1>Aquaveda</h1>
-      <p>Geo-intelligent water conservation platform foundation is live.</p>
-      <div style={{ display: "flex", gap: "1rem" }}>
-        <Link to="/health">Check health</Link>
-        <Link to="/issues-map">Open issues map</Link>
-        <Link to="/dashboard">Open dashboard</Link>
-      </div>
-    </main>
-  );
-}
+function ProtectedRoute({ children }) {
+  const { isAuthenticated, loading } = useAuth();
+  const location = useLocation();
 
-function Health() {
-  return (
-    <main style={{ fontFamily: "system-ui, sans-serif", padding: "2rem" }}>
-      <h1>Client Ready</h1>
-      <p>The frontend scaffold is running.</p>
-    </main>
-  );
+  if (loading) {
+    return <main className="page-message">Checking session...</main>;
+  }
+
+  if (!isAuthenticated) {
+    return <Navigate to="/login" replace state={{ from: location }} />;
+  }
+
+  return children;
 }
 
 export default function App() {
@@ -32,10 +31,28 @@ export default function App() {
     <BrowserRouter>
       <Suspense fallback={<main style={{ fontFamily: "system-ui, sans-serif", padding: "2rem" }}>Loading dashboard...</main>}>
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/health" element={<Health />} />
-          <Route path="/issues-map" element={<IssueMapPage />} />
-          <Route path="/dashboard" element={<DashboardPage />} />
+          <Route path="/" element={<Navigate to="/explore" replace />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/health" element={<main className="page-message">Client ready</main>} />
+
+          <Route path="/" element={<MainLayout />}>
+            <Route path="explore" element={<IssueMapPage />} />
+            <Route path="issues-map" element={<Navigate to="/explore" replace />} />
+            <Route path="learn" element={<LearnPage />} />
+            <Route path="act" element={<ActPage />} />
+            <Route path="community" element={<CommunityPage />} />
+            <Route
+              path="dashboard"
+              element={(
+                <ProtectedRoute>
+                  <DashboardPage />
+                </ProtectedRoute>
+              )}
+            />
+          </Route>
+
+          <Route path="*" element={<Navigate to="/explore" replace />} />
         </Routes>
       </Suspense>
     </BrowserRouter>

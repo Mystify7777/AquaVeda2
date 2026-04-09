@@ -1,9 +1,8 @@
 import { useMemo, useState } from "react";
 import RoleChart from "../components/dashboard/RoleChart.jsx";
 import StatusBarChart from "../components/dashboard/StatusBarChart.jsx";
+import { useAuth } from "../contexts/AuthContext.jsx";
 import { getAdminDashboard, getUserDashboard } from "../services/api.js";
-
-const tokenStorageKey = "token";
 
 const Card = ({ label, value }) => {
   return (
@@ -15,11 +14,13 @@ const Card = ({ label, value }) => {
 };
 
 export default function DashboardPage() {
-  const [token, setToken] = useState(localStorage.getItem(tokenStorageKey) || "");
+  const { token, user } = useAuth();
   const [mode, setMode] = useState("user");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [dashboard, setDashboard] = useState(null);
+
+  const canViewAdmin = user?.role === "ADMIN";
 
   const userCards = useMemo(() => {
     if (!dashboard?.stats) {
@@ -57,8 +58,6 @@ export default function DashboardPage() {
       setLoading(true);
       setError("");
 
-      localStorage.setItem(tokenStorageKey, token);
-
       const response = mode === "admin" ? await getAdminDashboard(token) : await getUserDashboard(token);
       setDashboard(response.data);
     } catch (err) {
@@ -73,32 +72,28 @@ export default function DashboardPage() {
     <main className="dashboard-page">
       <header className="dashboard-header">
         <h1>Impact Dashboard</h1>
-        <p>Use your JWT token to load user or admin platform metrics.</p>
+        <p>Track measurable outcomes and contribution intelligence.</p>
       </header>
 
       <section className="dashboard-toolbar">
         <label>
-          <span>Token</span>
-          <textarea
-            value={token}
-            onChange={(event) => setToken(event.target.value)}
-            placeholder="Paste Bearer token value"
-            rows={3}
-          />
-        </label>
-
-        <label>
           <span>Mode</span>
-          <select value={mode} onChange={(event) => setMode(event.target.value)}>
+          <select
+            value={mode}
+            onChange={(event) => setMode(event.target.value)}
+            disabled={!canViewAdmin}
+          >
             <option value="user">User dashboard</option>
-            <option value="admin">Admin dashboard</option>
+            {canViewAdmin ? <option value="admin">Admin dashboard</option> : null}
           </select>
         </label>
 
-        <button type="button" className="dashboard-load-btn" onClick={loadDashboard} disabled={loading || !token.trim()}>
+        <button type="button" className="dashboard-load-btn" onClick={loadDashboard} disabled={loading || !token}>
           {loading ? "Loading..." : "Load dashboard"}
         </button>
       </section>
+
+      {!canViewAdmin ? <p className="dashboard-note">Admin analytics are visible to ADMIN role only.</p> : null}
 
       {error ? <p className="error-text">{error}</p> : null}
 
@@ -122,7 +117,7 @@ export default function DashboardPage() {
         <p className="dashboard-empty">No dashboard data loaded yet.</p>
       )}
 
-      {dashboard && mode === "admin" ? (
+      {dashboard && mode === "admin" && canViewAdmin ? (
         <section className="dashboard-extra">
           <h2>Analytics Overview</h2>
           <div className="charts">

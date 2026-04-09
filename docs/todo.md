@@ -187,3 +187,31 @@ Exit criteria:
 - [ ] Add endpoint design for smart recommendations: ruleBased + aiGenerated response contract
 - [ ] Trigger policy: call LLM only on explicit user action (never on every issue fetch)
 - [ ] Add safeguards before rollout: rate limiting, caching, fallback behavior when LLM is unavailable
+
+---
+
+## Product-First Roadmap (Active)
+
+### Phase A — UX & Interaction
+
+- [x] IA shell with clear top-level routes: Explore, Learn, Act, Community, Dashboard
+- [x] Shared top navigation and app layout shell
+- [x] Auth UI flow started: login/register pages wired and dashboard route protected
+- [ ] Map-first detail panel redesign (desktop side panel and mobile bottom sheet)
+- [ ] Unified loading, empty, and error states across all top-level views
+- [ ] Visual system baseline pass (severity tokens, spacing scale, cards and interactions)
+
+### Phase B — Feature Depth
+
+- [ ] Issue confirmations or affected-too workflow
+- [ ] Issue status history timeline
+- [ ] Project milestones
+- [ ] Project progress update log
+- [ ] Dashboard impact counters tied to lifecycle outputs
+
+### Phase C — Intelligence & Trust
+
+- [ ] Reputation scoring rules linked to meaningful actions
+- [ ] Moderation queue with report and resolution actions
+- [ ] Comment helpful sorting and basic mentions
+- [ ] Context-aware AI inputs (issue state, region, trust signals) while keeping deterministic rule-first behavior
