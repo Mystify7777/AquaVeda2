@@ -33,3 +33,4 @@
 [2026-04-10] - Dashboard - Implemented user and admin dashboard APIs plus frontend dashboard page with token-based mode switch and stat cards
 [2026-04-10] - Dashboard - Upgraded admin dashboard with 3 clean Recharts visuals (role split, issue status, project status) using backend chart-ready aggregates
 [2026-04-10] - Dashboard - Added compact chart legends and deterministic status ordering for issue and project charts to improve readability and consistency
+[2026-04-10] - Frontend Perf - Lazy-loaded dashboard route so charting dependencies are split from initial app bundle

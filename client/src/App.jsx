@@ -1,6 +1,8 @@
+import { Suspense, lazy } from "react";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
-import DashboardPage from "./pages/DashboardPage.jsx";
 import IssueMapPage from "./pages/IssueMapPage.jsx";
+
+const DashboardPage = lazy(() => import("./pages/DashboardPage.jsx"));
 
 function Home() {
   return (
@@ -28,12 +30,14 @@ function Health() {
 export default function App() {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/health" element={<Health />} />
-        <Route path="/issues-map" element={<IssueMapPage />} />
-        <Route path="/dashboard" element={<DashboardPage />} />
-      </Routes>
+      <Suspense fallback={<main style={{ fontFamily: "system-ui, sans-serif", padding: "2rem" }}>Loading dashboard...</main>}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/health" element={<Health />} />
+          <Route path="/issues-map" element={<IssueMapPage />} />
+          <Route path="/dashboard" element={<DashboardPage />} />
+        </Routes>
+      </Suspense>
     </BrowserRouter>
   );
 }
