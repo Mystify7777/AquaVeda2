@@ -35,3 +35,4 @@
 [2026-04-10] - Dashboard - Added compact chart legends and deterministic status ordering for issue and project charts to improve readability and consistency
 [2026-04-10] - Frontend Perf - Lazy-loaded dashboard route so charting dependencies are split from initial app bundle
 [2026-04-10] - Product UX - Started Phase A with IA shell routes, shared top navigation layout, login/register pages, and protected dashboard access using auth context
+[2026-04-10] - Planning - Reframed TODO into product UI system roadmap with mandatory Explore + IssuePanel redesign first, then dashboard and section consistency passes

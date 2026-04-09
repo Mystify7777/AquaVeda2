@@ -190,7 +190,126 @@ Exit criteria:
 
 ---
 
-## Product-First Roadmap (Active)
+## Product UI System Roadmap (Active)
+
+Core loop to optimize in every feature slice:
+
+Problem -> Insight -> Collaboration -> Action -> Impact -> Trust
+
+### Current Focus (Mandatory First)
+
+- [ ] Build `ExplorePage` as primary hero screen
+- [ ] Replace map popup-heavy flow with structured `IssuePanel`
+- [ ] Deliver 3-column desktop layout: FilterPanel | MapCanvas | IssuePanel
+- [ ] Deliver mobile behavior: map + bottom-sheet issue details
+
+### Global UI Architecture
+
+- [x] Top-level IA routes: Explore, Learn, Act, Community, Dashboard
+- [x] Shared top navigation shell
+- [ ] Add contextual sidebar system by section
+	- Explore: filters
+	- Learn: categories
+	- Act: project navigation
+	- Dashboard: stat links
+- [ ] Add top-nav utility actions: search, notifications, profile menu
+
+### Explore (Map-First UX) — Step 1
+
+- [ ] Create page and layout containers
+	- `pages/ExplorePage.jsx`
+	- `components/layout/TopNav.jsx`
+	- `components/layout/Sidebar.jsx`
+- [ ] Create map system components
+	- `components/map/MapCanvas.jsx`
+	- `components/map/MarkerLayer.jsx`
+	- `components/map/IssueMarker.jsx`
+- [ ] Create issue panel system
+	- `components/issues/IssuePanel.jsx`
+	- `components/issues/IssueHeader.jsx`
+	- `components/issues/IssueDetails.jsx`
+	- `components/issues/IssueAISection.jsx`
+	- `components/issues/IssueCommentsPreview.jsx`
+	- `components/issues/IssueActions.jsx`
+- [ ] Create filter components
+	- `components/filters/FilterPanel.jsx`
+	- `components/filters/SeverityFilter.jsx`
+	- `components/filters/StatusFilter.jsx`
+	- `components/filters/RegionFilter.jsx`
+- [ ] Issue panel content rules
+	- title + severity badge
+	- description
+	- AI suggestions accordion
+	- latest 3 comments + view all entry point
+	- actions: Start Project, Add Comment
+
+### Dashboard (Refactor) — Step 2
+
+- [ ] Keep stat cards + 3-chart row clarity
+- [ ] Extract and reuse `StatCard` component
+- [ ] Reduce controls to role-appropriate actions only
+- [ ] Keep progressive disclosure for advanced analytics
+
+### Learn and Act Consistency — Step 3
+
+- [ ] Learn section UI composition
+	- `pages/WikiPage.jsx`
+	- `components/wiki/WikiList.jsx`
+	- `components/wiki/WikiCard.jsx`
+	- `components/wiki/WikiArticle.jsx`
+	- `components/wiki/WikiEditor.jsx`
+- [ ] Projects section UI composition
+	- `pages/ProjectsPage.jsx`
+	- `components/projects/ProjectCard.jsx`
+	- `components/projects/ProjectList.jsx`
+	- `components/projects/ProjectDetails.jsx`
+	- `components/projects/ProgressBar.jsx`
+	- `components/projects/MilestoneList.jsx`
+
+### Community Structure
+
+- [ ] Build dedicated community thread page
+	- `pages/CommunityPage.jsx`
+	- `components/comments/CommentList.jsx`
+	- `components/comments/CommentItem.jsx`
+	- `components/comments/ReplyThread.jsx`
+	- `components/comments/CommentInput.jsx`
+
+### Design System Baseline (Apply Across All)
+
+- [ ] Color tokens
+	- Primary `#2563eb`
+	- Success `#16a34a`
+	- Warning `#f59e0b`
+	- Danger `#dc2626`
+	- Neutral `#f8fafc` and `#1e293b`
+- [ ] Spacing system: 8px grid
+- [ ] Card system
+	- radius: 12px
+	- soft shadow
+	- padding: 16-20px
+- [ ] States in every major view
+	- loading: skeletons
+	- empty: friendly message + CTA
+	- error: recoverable action
+
+### Product UX Guardrails
+
+- [ ] One-screen clarity: what is happening, what user can do, impact result
+- [ ] No clutter: max 3 primary actions per screen
+- [ ] Progressive disclosure: complex details behind expandable sections
+
+### Next Build Order
+
+1. ExplorePage + IssuePanel redesign (mandatory)
+2. Dashboard UI clarity refactor
+3. Learn + Projects consistency styling and component parity
+
+---
+
+## Phase Checkpoint Summary (Tracking Anchors)
+
+Keep this summary in sync with the detailed roadmap above.
 
 ### Phase A — UX & Interaction
 
