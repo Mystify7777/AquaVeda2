@@ -28,3 +28,5 @@
 [2026-04-07] - Community - Comment and reply system for issue discussions implemented and validated
 [2026-04-07] - Projects - Collaboration module implemented with create, join, list, and creator-controlled progress tracking
 [2026-04-07] - Docs - Rewrote AquaVeda README with structured overview, setup, architecture, API, and future scope
+[2026-04-10] - Hardening - Added centralized route validation (Zod), reusable pagination, and env-based CORS allowlist handling
+[2026-04-10] - Hardening - Added global plus auth-specific rate limiting and validated invalid input, pagination, rate-limit, CORS, and nearby geo flows

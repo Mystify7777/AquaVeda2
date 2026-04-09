@@ -44,10 +44,10 @@ Frontend -> Backend API -> MongoDB -> AI Layer -> Map Layer
 
 ```text
 AquaVeda/
-	client/
-	server/
-	docs/
-	ai-service/
+  client/
+  server/
+  docs/
+  ai-service/
 ```
 
 - `client`: React app with map UI and issue interactions
@@ -151,7 +151,7 @@ AquaVeda/
 - Node.js 18+ recommended
 - MongoDB running locally or Atlas connection string
 
-### Server
+### Server Runtime
 
 ```bash
 cd server
@@ -159,7 +159,7 @@ npm install
 npm run dev
 ```
 
-### Client
+### Client Runtime
 
 ```bash
 cd client
@@ -176,17 +176,22 @@ npm run seed:users
 
 ## Environment Variables
 
-### Server
+### Server Environment
 
 ```env
 PORT=5000
 MONGO_URI=mongodb://localhost:27017/
 CLIENT_URL=http://localhost:3000
+ALLOWED_ORIGINS=http://localhost:3000,http://localhost:5173
 JWT_SECRET=change_me_in_dev
 JWT_EXPIRES=7d
+RATE_LIMIT_WINDOW_MS=900000
+RATE_LIMIT_MAX=200
+AUTH_RATE_LIMIT_WINDOW_MS=900000
+AUTH_RATE_LIMIT_MAX=20
 ```
 
-### Client
+### Client Environment
 
 ```env
 VITE_API_URL=http://localhost:5000/api
@@ -218,6 +223,13 @@ GEMINI_API_KEY=your_api_key_here
 - Every change must be logged in `docs/logs.md`
 - Every bug must be recorded in `docs/bugs.md`
 - No undocumented feature is allowed
+
+## Hardening Notes
+
+- Route validation is centralized with Zod-based middleware
+- List APIs use standardized pagination (`page`, `limit`)
+- Rate limiting is enabled globally and stricter for auth endpoints
+- CORS allowlist is controlled through `ALLOWED_ORIGINS` for deployment flexibility
 
 ## Future Scope
 

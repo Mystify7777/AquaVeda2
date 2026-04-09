@@ -34,15 +34,7 @@ export const list = async (req, res) => {
   try {
     const { refType, refId } = req.query;
 
-    if (!refType || !refId) {
-      return error(res, "refType and refId required", 400);
-    }
-
-    if (!validRefTypes.has(refType)) {
-      return error(res, "Invalid refType", 400);
-    }
-
-    const comments = await commentService.getComments(refType, refId);
+    const comments = await commentService.getComments(refType, refId, req.query);
     return success(res, comments, "Comments fetched");
   } catch (err) {
     return error(res, err.message, 400);

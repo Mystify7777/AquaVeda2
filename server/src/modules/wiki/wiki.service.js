@@ -1,4 +1,5 @@
 import Wiki from "./wiki.model.js";
+import { buildPaginationMeta, getPagination } from "../../utils/pagination.js";
 
 export const createArticle = async (data, userId) => {
   return Wiki.create({
@@ -7,8 +8,19 @@ export const createArticle = async (data, userId) => {
   });
 };
 
-export const getAllApproved = async () => {
-  return Wiki.find({ status: "APPROVED" }).populate("author", "name");
+export const getAllApproved = async (query = {}) => {
+  const { page, limit, skip } = getPagination(query);
+  const findQuery = { status: "APPROVED" };
+
+  const [items, total] = await Promise.all([
+    Wiki.find(findQuery).populate("author", "name").sort({ createdAt: -1 }).skip(skip).limit(limit),
+    Wiki.countDocuments(findQuery)
+  ]);
+
+  return {
+    items,
+    pagination: buildPaginationMeta(page, limit, total)
+  };
 };
 
 export const approveArticle = async (id, expertId) => {
@@ -52,6 +64,17 @@ export const rejectArticle = async (id) => {
   );
 };
 
-export const getUserArticles = async (userId) => {
-  return Wiki.find({ author: userId }).sort({ createdAt: -1 });
+export const getUserArticles = async (userId, query = {}) => {
+  const { page, limit, skip } = getPagination(query);
+  const findQuery = { author: userId };
+
+  const [items, total] = await Promise.all([
+    Wiki.find(findQuery).sort({ createdAt: -1 }).skip(skip).limit(limit),
+    Wiki.countDocuments(findQuery)
+  ]);
+
+  return {
+    items,
+    pagination: buildPaginationMeta(page, limit, total)
+  };
 };

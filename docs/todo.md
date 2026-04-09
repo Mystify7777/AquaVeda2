@@ -61,6 +61,16 @@
 
 ---
 
+## 🔐 PHASE 1.5 — HARDENING
+
+- [x] Zod-based centralized validation middleware
+- [x] Reusable pagination helper and paginated list endpoints
+- [x] Global and auth-specific rate limiting
+- [x] CORS tightening using env-driven ALLOWED_ORIGINS
+- [x] Safety checks for geo numeric parsing and progress bounds
+
+---
+
 ## Execution Plan (April 2026)
 
 ### Sprint 1 (Current) - Access + Data Foundations
@@ -76,6 +86,10 @@ Goal: unlock secure user flows and stable data models so feature work can procee
 - [ ] User model with role and profile basics
 - [x] Shared API response + error shape
 - [x] Seed script for admin and expert test users
+- [x] Request validation middleware (phase 1.5)
+- [x] Pagination standardization (phase 1.5)
+- [x] Rate limiting (phase 1.5)
+- [x] CORS hardening with ALLOWED_ORIGINS (phase 1.5)
 
 Exit criteria:
 

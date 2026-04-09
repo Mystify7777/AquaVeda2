@@ -32,7 +32,7 @@ export const join = async (req, res) => {
 
 export const getAll = async (req, res) => {
   try {
-    const projects = await projectService.getProjects();
+    const projects = await projectService.getProjects(req.query);
     return success(res, projects, "Projects fetched");
   } catch (err) {
     return error(res, err.message, 400);
@@ -41,11 +41,7 @@ export const getAll = async (req, res) => {
 
 export const setProgress = async (req, res) => {
   try {
-    const progress = Number(req.body.progress);
-
-    if (!Number.isFinite(progress) || progress < 0 || progress > 100) {
-      return error(res, "progress must be a number between 0 and 100", 400);
-    }
+    const progress = req.body.progress;
 
     const project = await projectService.updateProgress(req.params.id, progress, req.user.id);
     return success(res, project, "Project progress updated");

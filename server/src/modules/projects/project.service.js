@@ -1,4 +1,5 @@
 import Project from "./project.model.js";
+import { buildPaginationMeta, getPagination } from "../../utils/pagination.js";
 
 export const createProject = async (data, userId) => {
   return Project.create({
@@ -19,12 +20,23 @@ export const joinProject = async (projectId, userId) => {
     .populate("relatedIssue", "title severity status");
 };
 
-export const getProjects = async () => {
-  return Project.find()
-    .sort({ createdAt: -1 })
-    .populate("createdBy", "name")
-    .populate("contributors", "name")
-    .populate("relatedIssue", "title severity status");
+export const getProjects = async (query = {}) => {
+  const { page, limit, skip } = getPagination(query);
+  const [items, total] = await Promise.all([
+    Project.find()
+      .sort({ createdAt: -1 })
+      .skip(skip)
+      .limit(limit)
+      .populate("createdBy", "name")
+      .populate("contributors", "name")
+      .populate("relatedIssue", "title severity status"),
+    Project.countDocuments()
+  ]);
+
+  return {
+    items,
+    pagination: buildPaginationMeta(page, limit, total)
+  };
 };
 
 export const updateProgress = async (projectId, progress, userId) => {

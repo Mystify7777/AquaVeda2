@@ -12,7 +12,7 @@ export const create = async (req, res) => {
 
 export const getAll = async (req, res) => {
   try {
-    const articles = await wikiService.getAllApproved();
+    const articles = await wikiService.getAllApproved(req.query);
     return success(res, articles, "Approved articles");
   } catch (err) {
     return error(res, err.message, 400);
@@ -70,7 +70,7 @@ export const update = async (req, res) => {
 
 export const getMine = async (req, res) => {
   try {
-    const articles = await wikiService.getUserArticles(req.user.id);
+    const articles = await wikiService.getUserArticles(req.user.id, req.query);
     return success(res, articles, "User articles");
   } catch (err) {
     return error(res, err.message, 400);
