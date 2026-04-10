@@ -198,10 +198,10 @@ Problem -> Insight -> Collaboration -> Action -> Impact -> Trust
 
 ### Current Focus (Mandatory First)
 
-- [ ] Build `ExplorePage` as primary hero screen
-- [ ] Replace map popup-heavy flow with structured `IssuePanel`
-- [ ] Deliver 3-column desktop layout: FilterPanel | MapCanvas | IssuePanel
-- [ ] Deliver mobile behavior: map + bottom-sheet issue details
+- [x] Build `ExplorePage` as primary hero screen
+- [x] Replace map popup-heavy flow with structured `IssuePanel`
+- [x] Deliver 3-column desktop layout: FilterPanel | MapCanvas | IssuePanel
+- [x] Deliver mobile behavior: map + bottom-sheet issue details
 
 ### Global UI Architecture
 
@@ -216,27 +216,27 @@ Problem -> Insight -> Collaboration -> Action -> Impact -> Trust
 
 ### Explore (Map-First UX) — Step 1
 
-- [ ] Create page and layout containers
+- [x] Create page and layout containers
 	- `pages/ExplorePage.jsx`
 	- `components/layout/TopNav.jsx`
 	- `components/layout/Sidebar.jsx`
-- [ ] Create map system components
+- [x] Create map system components
 	- `components/map/MapCanvas.jsx`
 	- `components/map/MarkerLayer.jsx`
 	- `components/map/IssueMarker.jsx`
-- [ ] Create issue panel system
+- [x] Create issue panel system
 	- `components/issues/IssuePanel.jsx`
 	- `components/issues/IssueHeader.jsx`
 	- `components/issues/IssueDetails.jsx`
 	- `components/issues/IssueAISection.jsx`
 	- `components/issues/IssueCommentsPreview.jsx`
 	- `components/issues/IssueActions.jsx`
-- [ ] Create filter components
+- [x] Create filter components
 	- `components/filters/FilterPanel.jsx`
 	- `components/filters/SeverityFilter.jsx`
 	- `components/filters/StatusFilter.jsx`
 	- `components/filters/RegionFilter.jsx`
-- [ ] Issue panel content rules
+- [x] Issue panel content rules
 	- title + severity badge
 	- description
 	- AI suggestions accordion
@@ -316,7 +316,7 @@ Keep this summary in sync with the detailed roadmap above.
 - [x] IA shell with clear top-level routes: Explore, Learn, Act, Community, Dashboard
 - [x] Shared top navigation and app layout shell
 - [x] Auth UI flow started: login/register pages wired and dashboard route protected
-- [ ] Map-first detail panel redesign (desktop side panel and mobile bottom sheet)
+- [x] Map-first detail panel redesign (desktop side panel and mobile bottom sheet)
 - [ ] Unified loading, empty, and error states across all top-level views
 - [ ] Visual system baseline pass (severity tokens, spacing scale, cards and interactions)
 

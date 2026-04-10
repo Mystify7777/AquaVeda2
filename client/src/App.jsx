@@ -4,7 +4,7 @@ import { useAuth } from "./contexts/AuthContext.jsx";
 import MainLayout from "./layouts/MainLayout.jsx";
 import ActPage from "./pages/ActPage.jsx";
 import CommunityPage from "./pages/CommunityPage.jsx";
-import IssueMapPage from "./pages/IssueMapPage.jsx";
+import ExplorePage from "./pages/ExplorePage.jsx";
 import LearnPage from "./pages/LearnPage.jsx";
 import LoginPage from "./pages/LoginPage.jsx";
 import RegisterPage from "./pages/RegisterPage.jsx";
@@ -37,7 +37,7 @@ export default function App() {
           <Route path="/health" element={<main className="page-message">Client ready</main>} />
 
           <Route path="/" element={<MainLayout />}>
-            <Route path="explore" element={<IssueMapPage />} />
+            <Route path="explore" element={<ExplorePage />} />
             <Route path="issues-map" element={<Navigate to="/explore" replace />} />
             <Route path="learn" element={<LearnPage />} />
             <Route path="act" element={<ActPage />} />

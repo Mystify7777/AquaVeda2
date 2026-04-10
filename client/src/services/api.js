@@ -22,6 +22,10 @@ export const getIssueMapData = async (filters = {}) => {
 		query.set("status", filters.status);
 	}
 
+	if (filters.region) {
+		query.set("region", filters.region);
+	}
+
 	const endpoint = query.toString()
 		? `${API_URL}/v1/issues/map?${query.toString()}`
 		: `${API_URL}/v1/issues/map`;
