@@ -2,7 +2,19 @@ import RegionFilter from "./RegionFilter.jsx";
 import SeverityFilter from "./SeverityFilter.jsx";
 import StatusFilter from "./StatusFilter.jsx";
 
-export default function FilterPanel({ filters, onChange }) {
+export default function FilterPanel({ filters, onChange, issues = [] }) {
+  const severityCounts = issues.reduce((acc, issue) => {
+    const key = issue.severity || "LOW";
+    acc[key] = (acc[key] || 0) + 1;
+    return acc;
+  }, {});
+
+  const statusCounts = issues.reduce((acc, issue) => {
+    const key = issue.status || "OPEN";
+    acc[key] = (acc[key] || 0) + 1;
+    return acc;
+  }, {});
+
   const activeFilters = [
     filters.severity ? { key: "severity", label: filters.severity } : null,
     filters.status ? { key: "status", label: filters.status } : null,
@@ -41,11 +53,13 @@ export default function FilterPanel({ filters, onChange }) {
 
       <SeverityFilter
         value={filters.severity}
+        counts={severityCounts}
         onChange={(severity) => onChange({ ...filters, severity })}
       />
 
       <StatusFilter
         value={filters.status}
+        counts={statusCounts}
         onChange={(status) => onChange({ ...filters, status })}
       />
 

@@ -38,3 +38,4 @@
 [2026-04-10] - Planning - Reframed TODO into product UI system roadmap with mandatory Explore + IssuePanel redesign first, then dashboard and section consistency passes
 [2026-04-10] - Explore UX - Rebuilt Explore into a map-centered workspace with filter sidebar, persistent issue panel, marker-to-panel selection flow, and no popup dependency
 [2026-04-10] - Explore UX - Refined interaction depth with grouped IssuePanel hierarchy, progressive AI accordion, real comments preview, contextual CTAs, marker hover + tooltip feedback, filter chips/reset, and stronger empty/loading states
+[2026-04-10] - Visual System - Enforced typography and spacing hierarchy, card and button consistency, navigation utility controls, marker identity polish, and subtle motion patterns across Explore

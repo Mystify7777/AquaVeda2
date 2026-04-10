@@ -40,7 +40,7 @@ export default function IssueAISection({ issue }) {
   return (
     <section className="issue-section">
       <div className="section-row">
-        <h3>AI Suggestions</h3>
+        <h3 className="section-title">AI Suggestions</h3>
         <button type="button" className="ghost-btn" onClick={handleToggle} disabled={loading}>
           {loading ? "Fetching suggestions..." : open ? "Hide" : "Show"}
         </button>
@@ -50,7 +50,7 @@ export default function IssueAISection({ issue }) {
       {!open && !loading ? <p className="panel-empty">Expand to view AI-backed guidance for this issue.</p> : null}
 
       {open && data.length > 0 ? (
-        <ul className="issue-list">
+        <ul className="issue-list issue-list-animated">
           {data.map((item) => (
             <li key={item}>{item}</li>
           ))}

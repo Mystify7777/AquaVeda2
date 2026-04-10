@@ -20,7 +20,8 @@ export default function IssueMarker({ issue, isSelected, onSelectIssue }) {
         color: isSelected ? "#1e3a8a" : severityColors[issue.severity] || "#2563eb",
         fillColor: severityColors[issue.severity] || "#2563eb",
         fillOpacity: isSelected ? 0.95 : hovered ? 0.9 : 0.8,
-        weight: isSelected ? 3 : hovered ? 2.5 : 2
+        weight: isSelected ? 3 : hovered ? 2.5 : 2,
+        className: `issue-marker severity-${(issue.severity || "LOW").toLowerCase()} ${isSelected ? "selected" : ""}`
       }}
       eventHandlers={{
         click: () => onSelectIssue(issue),

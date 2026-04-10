@@ -27,7 +27,7 @@ export default function IssueCommentsPreview({ issue }) {
 
   return (
     <section className="issue-section">
-      <h3>Comments</h3>
+      <h3 className="section-title">Comments</h3>
       {loading ? <p className="panel-empty">Loading comments...</p> : null}
       {error ? <p className="error-text">{error}</p> : null}
 
@@ -45,7 +45,7 @@ export default function IssueCommentsPreview({ issue }) {
       ) : null}
 
       <button type="button" className="ghost-btn issue-link-btn">
-        View all discussions
+        View all discussions {"->"}
       </button>
     </section>
   );

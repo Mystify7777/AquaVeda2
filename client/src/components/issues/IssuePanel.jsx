@@ -7,7 +7,7 @@ import IssueHeader from "./IssueHeader.jsx";
 export default function IssuePanel({ issue }) {
   if (!issue) {
     return (
-      <div className="issue-panel-empty">
+      <div className="issue-panel-empty card">
         <h2>Select an issue to view details</h2>
         <p>Click any marker on the map to open context, insights, and actions.</p>
       </div>
@@ -15,7 +15,7 @@ export default function IssuePanel({ issue }) {
   }
 
   return (
-    <div className="issue-panel">
+    <div className="issue-panel card issue-panel-animate">
       <IssueHeader issue={issue} />
       <IssueDetails issue={issue} />
 

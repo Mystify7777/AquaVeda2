@@ -206,6 +206,10 @@ Problem -> Insight -> Collaboration -> Action -> Impact -> Trust
 - [x] Improve marker UX (hover feedback, selected marker emphasis, severity styling)
 - [x] Upgrade filter UX with active chips and reset
 - [x] Add Explore-level empty and loading states with recovery CTA
+- [x] Enforce typography and spacing hierarchy in Explore workspace
+- [x] Standardize card and button system usage in Explore interaction surfaces
+- [x] Add marker visual identity polish including critical pulse and tooltip guidance
+- [x] Add subtle motion for panel updates, AI disclosure, and interactive controls
 
 ### Global UI Architecture
 
@@ -322,7 +326,7 @@ Keep this summary in sync with the detailed roadmap above.
 - [x] Auth UI flow started: login/register pages wired and dashboard route protected
 - [x] Map-first detail panel redesign (desktop side panel and mobile bottom sheet)
 - [ ] Unified loading, empty, and error states across all top-level views
-- [ ] Visual system baseline pass (severity tokens, spacing scale, cards and interactions)
+- [x] Visual system baseline pass (severity tokens, spacing scale, cards and interactions)
 
 ### Phase B — Feature Depth
 

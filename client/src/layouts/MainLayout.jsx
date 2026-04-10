@@ -32,17 +32,30 @@ export default function MainLayout() {
           ))}
         </nav>
 
+        <div className="top-nav-tools" aria-label="Utilities">
+          <label className="top-search">
+            <span className="sr-only">Search</span>
+            <input type="search" placeholder="Search issues, articles, projects" />
+          </label>
+          <button type="button" className="icon-btn" title="Notifications" aria-label="Notifications">
+            Notifications
+          </button>
+          <button type="button" className="icon-btn" title="Profile" aria-label="Profile">
+            {isAuthenticated ? user?.name?.slice(0, 1).toUpperCase() || "U" : "P"}
+          </button>
+        </div>
+
         <div className="top-nav-auth">
           {isAuthenticated ? (
             <>
               <span className="user-pill">{user?.role || "USER"}</span>
-              <button type="button" className="ghost-btn" onClick={logout}>
+              <button type="button" className="secondary-btn" onClick={logout}>
                 Logout
               </button>
             </>
           ) : (
             <>
-              <NavLink to="/login" className="ghost-btn link-btn">
+              <NavLink to="/login" className="secondary-btn link-btn">
                 Login
               </NavLink>
               <NavLink to="/register" className="primary-btn link-btn">

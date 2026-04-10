@@ -82,6 +82,7 @@ Aquaveda is a geo-intelligent water conservation platform combining knowledge sh
 - Product-first Phase A started with IA top-level areas, shared navigation layout, auth pages, and protected dashboard flow via centralized auth context
 - Explore UX redesigned into a persistent workspace using FilterPanel + MapCanvas + IssuePanel architecture with marker-click panel updates and responsive layout
 - Explore UX refinement layer added with progressive AI disclosure, live comments preview snippets, contextual action CTAs, marker hover or selection feedback, active filter chips, and map empty-state recovery actions
+- Visual consistency layer applied in Explore with typography scale, 8px spacing rhythm, reusable card/button styles, utility top-nav controls, marker pulse identity for critical issues, and subtle panel/accordion motion
 
 ---
 

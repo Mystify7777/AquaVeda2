@@ -2,11 +2,57 @@
   box-sizing: border-box;
 }
 
+:root {
+  --color-primary: #2563eb;
+  --color-success: #16a34a;
+  --color-warning: #f59e0b;
+  --color-danger: #dc2626;
+  --color-neutral-100: #f8fafc;
+  --color-neutral-800: #1e293b;
+  --space-1: 8px;
+  --space-2: 16px;
+  --space-3: 24px;
+  --radius-card: 12px;
+  --shadow-soft: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
 body {
   margin: 0;
   background: #f6faf9;
   color: #123;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  color: var(--color-neutral-800);
+}
+
+h1 {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+h2 {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+h3,
+.section-title {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.card {
+  background: #fff;
+  border-radius: var(--radius-card);
+  padding: var(--space-2);
+  box-shadow: var(--shadow-soft);
 }
 
 .app-shell {
@@ -19,7 +65,7 @@ body {
   z-index: 20;
   display: grid;
   grid-template-columns: auto 1fr auto;
-  gap: 1rem;
+  gap: var(--space-2);
   align-items: center;
   padding: 0.8rem 1rem;
   background: #ffffffee;
@@ -64,6 +110,45 @@ body {
   align-items: center;
 }
 
+.top-nav-tools {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.top-search input {
+  width: 220px;
+  border: 1px solid #cbd5e1;
+  border-radius: 999px;
+  padding: 0.4rem 0.75rem;
+  font: inherit;
+}
+
+.icon-btn {
+  border: 1px solid #cbd5e1;
+  background: #f8fafc;
+  color: #334155;
+  border-radius: 999px;
+  height: 2rem;
+  min-width: 2rem;
+  padding: 0 0.65rem;
+  font-weight: 700;
+  font-size: 0.75rem;
+  cursor: pointer;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 .user-pill {
   display: inline-flex;
   align-items: center;
@@ -86,23 +171,31 @@ body {
 }
 
 .ghost-btn,
+.secondary-btn,
 .primary-btn {
-  border-radius: 0.4rem;
+  border-radius: 10px;
   padding: 0.45rem 0.7rem;
   font-weight: 600;
   border: 1px solid transparent;
   cursor: pointer;
+  transition: transform 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
 }
 
 .ghost-btn {
-  border-color: #b9c6d4;
+  border-color: transparent;
+  background: transparent;
+  color: #475569;
+}
+
+.secondary-btn {
+  border-color: #cbd5e1;
   background: #f8fafc;
   color: #1e293b;
 }
 
 .primary-btn {
-  border-color: #0f766e;
-  background: #0f766e;
+  border-color: var(--color-primary);
+  background: var(--color-primary);
   color: #fff;
 }
 
@@ -113,8 +206,9 @@ body {
   margin: 1.2rem auto;
   padding: 1rem;
   border: 1px solid #d9e5e2;
-  border-radius: 0.6rem;
+  border-radius: var(--radius-card);
   background: #fff;
+  box-shadow: var(--shadow-soft);
 }
 
 .auth-page h2,
@@ -172,7 +266,7 @@ body {
   grid-template-columns: 260px 1fr 360px;
   height: 100%;
   border: 1px solid #e2e8f0;
-  border-radius: 0.75rem;
+  border-radius: var(--radius-card);
   overflow: hidden;
   background: #fff;
 }
@@ -181,7 +275,7 @@ body {
   border-right: 1px solid #e2e8f0;
   padding: 16px;
   overflow-y: auto;
-  background: #f8fafc;
+  background: var(--color-neutral-100);
 }
 
 .explore-map {
@@ -216,7 +310,7 @@ body {
 
 .map-empty-state h2 {
   margin: 0;
-  font-size: 1.2rem;
+  font-size: 20px;
 }
 
 .map-empty-state p {
@@ -265,7 +359,7 @@ body {
 .filter-field {
   display: grid;
   gap: 0.35rem;
-  margin-bottom: 0.8rem;
+  margin-bottom: var(--space-2);
   font-weight: 600;
 }
 
@@ -282,7 +376,7 @@ body {
 }
 
 .issue-panel-empty p {
-  margin: 0.45rem 0 0;
+  margin: var(--space-1) 0 0;
   color: #475569;
 }
 
@@ -295,11 +389,11 @@ body {
 
 .issue-header h2 {
   margin: 0;
-  font-size: 1.15rem;
+  font-size: 20px;
 }
 
 .issue-group-label {
-  margin: 1rem 0 0.35rem;
+  margin: var(--space-2) 0 0.35rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   font-size: 0.7rem;
@@ -336,22 +430,34 @@ body {
 
 .issue-section {
   margin-top: 0.25rem;
-  padding-top: 0.8rem;
+  padding-top: var(--space-2);
   border-top: 1px solid #e2e8f0;
 }
 
 .issue-section h3 {
   margin: 0;
-  font-size: 0.95rem;
+}
+
+.issue-description {
+  margin-top: var(--space-1);
+  line-height: 1.65;
+  color: #334155;
+}
+
+.issue-meta-row {
+  margin-top: var(--space-1);
+  display: flex;
+  gap: var(--space-2);
+  flex-wrap: wrap;
 }
 
 .issue-section p {
-  margin: 0.5rem 0 0;
+  margin: var(--space-1) 0 0;
 }
 
 .issue-meta {
-  color: #475569;
-  font-size: 0.88rem;
+  color: #64748b;
+  font-size: 12px;
 }
 
 .section-row {
@@ -380,17 +486,69 @@ body {
 
 .issue-actions {
   display: flex;
-  gap: 0.5rem;
-  margin-top: 1rem;
-  padding-top: 1rem;
+  gap: var(--space-1);
+  margin-top: var(--space-2);
+  padding-top: var(--space-2);
   border-top: 1px solid #e2e8f0;
 }
 
 .primary-btn:hover,
+.secondary-btn:hover,
 .ghost-btn:hover,
 .filter-chip:hover,
 .nav-link:hover {
-  transform: translateY(-1px);
+  transform: scale(1.02);
+  box-shadow: var(--shadow-soft);
+}
+
+.issue-panel-animate {
+  animation: panelIn 220ms ease;
+}
+
+.issue-list-animated {
+  animation: expandIn 180ms ease;
+}
+
+@keyframes panelIn {
+  from {
+    opacity: 0;
+    transform: translateX(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes expandIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.issue-marker {
+  transition: stroke 200ms ease, stroke-width 200ms ease, fill-opacity 200ms ease;
+}
+
+.issue-marker.severity-critical {
+  animation: markerPulse 1.8s ease-in-out infinite;
+}
+
+@keyframes markerPulse {
+  0% {
+    stroke-width: 2;
+  }
+  50% {
+    stroke-width: 4;
+  }
+  100% {
+    stroke-width: 2;
+  }
 }
 
 .panel-empty {
@@ -611,9 +769,10 @@ a {
 
 .dashboard-card {
   border: 1px solid #b8d9d3;
-  border-radius: 0.5rem;
-  padding: 0.75rem;
+  border-radius: var(--radius-card);
+  padding: var(--space-2);
   background: #fff;
+  box-shadow: var(--shadow-soft);
 }
 
 .dashboard-card h3 {
@@ -709,6 +868,14 @@ a {
     align-items: start;
   }
 
+  .top-nav-tools {
+    width: 100%;
+  }
+
+  .top-search input {
+    width: 100%;
+  }
+
   .layout-main {
     padding: 0.5rem;
   }
@@ -742,5 +909,10 @@ a {
 
   .issue-actions {
     flex-direction: column;
+  }
+
+  .issue-meta-row {
+    flex-direction: column;
+    gap: 4px;
   }
 }

@@ -44,7 +44,7 @@ export default function ExplorePage() {
     <section className="explore-page">
       <div className="explore-layout">
         <aside className="explore-sidebar">
-          <FilterPanel filters={filters} onChange={setFilters} />
+          <FilterPanel filters={filters} onChange={setFilters} issues={issues} />
         </aside>
 
         <main className="explore-map" aria-label="Map workspace">
@@ -68,7 +68,7 @@ export default function ExplorePage() {
         </main>
 
         <section className="explore-panel">
-          <IssuePanel issue={selectedIssue} />
+          <IssuePanel key={selectedIssue?.id || "empty"} issue={selectedIssue} />
         </section>
       </div>
     </section>
