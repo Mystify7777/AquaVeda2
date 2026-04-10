@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import FilterPanel from "../components/filters/FilterPanel.jsx";
 import IssuePanel from "../components/issues/IssuePanel.jsx";
@@ -71,7 +72,17 @@ export default function ExplorePage() {
         </main>
 
         <section className="explore-panel">
-          <IssuePanel key={selectedIssue?.id || "empty"} issue={selectedIssue} />
+          <AnimatePresence mode="wait" initial={false}>
+            <motion.div
+              key={selectedIssue?.id || "empty"}
+              initial={{ opacity: 0, x: 14 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -10 }}
+              transition={{ duration: 0.22, ease: "easeInOut" }}
+            >
+              <IssuePanel issue={selectedIssue} />
+            </motion.div>
+          </AnimatePresence>
         </section>
       </div>
     </section>

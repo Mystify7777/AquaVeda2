@@ -40,3 +40,5 @@
 [2026-04-10] - Explore UX - Refined interaction depth with grouped IssuePanel hierarchy, progressive AI accordion, real comments preview, contextual CTAs, marker hover + tooltip feedback, filter chips/reset, and stronger empty/loading states
 [2026-04-10] - Visual System - Enforced typography and spacing hierarchy, card and button consistency, navigation utility controls, marker identity polish, and subtle motion patterns across Explore
 [2026-04-10] - Precision Polish - Completed final UI consistency pass with rhythm tuning, density calibration, press-feedback states, map focus overlay, and Dashboard style alignment to Explore
+[2026-04-10] - Motion - Integrated Framer Motion for issue panel transitions, AI accordion reveal, and filter chip enter/exit with subtle hover and tap feedback
+[2026-04-10] - Motion - Applied anti-overuse cleanup by removing duplicate CSS keyframe animations and narrowing motion to purposeful transition zones

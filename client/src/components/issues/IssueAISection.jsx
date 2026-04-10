@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import { getIssueRecommendations } from "../../services/api.js";
 
 export default function IssueAISection({ issue }) {
@@ -47,17 +48,49 @@ export default function IssueAISection({ issue }) {
       </div>
 
       {error ? <p className="error-text">{error}</p> : null}
-      {!open && !loading ? <p className="panel-empty">Expand to view AI-backed guidance for this issue.</p> : null}
 
-      {open && data.length > 0 ? (
-        <ul className="issue-list issue-list-animated">
-          {data.map((item) => (
-            <li key={item}>{item}</li>
-          ))}
-        </ul>
-      ) : null}
+      <AnimatePresence initial={false} mode="wait">
+        {!open && !loading ? (
+          <motion.p
+            key="ai-collapsed"
+            className="panel-empty"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2, ease: "easeInOut" }}
+          >
+            Expand to view AI-backed guidance for this issue.
+          </motion.p>
+        ) : null}
 
-      {open && !loading && data.length === 0 ? <p className="panel-empty">No suggestions available yet.</p> : null}
+        {open ? (
+          <motion.div
+            key="ai-expanded"
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.24, ease: "easeInOut" }}
+            style={{ overflow: "hidden" }}
+          >
+            {data.length > 0 ? (
+              <ul className="issue-list">
+                {data.map((item) => (
+                  <motion.li
+                    key={item}
+                    initial={{ opacity: 0, y: 4 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.18, ease: "easeInOut" }}
+                  >
+                    {item}
+                  </motion.li>
+                ))}
+              </ul>
+            ) : null}
+
+            {!loading && data.length === 0 ? <p className="panel-empty">No suggestions available yet.</p> : null}
+          </motion.div>
+        ) : null}
+      </AnimatePresence>
     </section>
   );
 }

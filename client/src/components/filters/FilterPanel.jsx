@@ -1,6 +1,7 @@
 import RegionFilter from "./RegionFilter.jsx";
 import SeverityFilter from "./SeverityFilter.jsx";
 import StatusFilter from "./StatusFilter.jsx";
+import { AnimatePresence, motion } from "framer-motion";
 
 export default function FilterPanel({ filters, onChange, issues = [] }) {
   const severityCounts = issues.reduce((acc, issue) => {
@@ -36,16 +37,25 @@ export default function FilterPanel({ filters, onChange, issues = [] }) {
 
       {activeFilters.length > 0 ? (
         <div className="filter-chip-list">
-          {activeFilters.map((item) => (
-            <button
-              type="button"
-              key={item.key}
-              className="filter-chip"
-              onClick={() => clearFilter(item.key)}
-            >
-              {item.label} x
-            </button>
-          ))}
+          <AnimatePresence>
+            {activeFilters.map((item) => (
+              <motion.button
+                type="button"
+                key={item.key}
+                className="filter-chip"
+                onClick={() => clearFilter(item.key)}
+                initial={{ opacity: 0, scale: 0.92 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.92 }}
+                transition={{ duration: 0.16, ease: "easeInOut" }}
+                whileHover={{ scale: 1.04 }}
+                whileTap={{ scale: 0.95 }}
+                layout
+              >
+                {item.label} x
+              </motion.button>
+            ))}
+          </AnimatePresence>
         </div>
       ) : (
         <p className="panel-empty">No active filters.</p>

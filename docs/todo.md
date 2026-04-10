@@ -214,6 +214,8 @@ Problem -> Insight -> Collaboration -> Action -> Impact -> Trust
 - [x] Content density calibration for issue description, comments preview, and AI list readability
 - [x] Map presence refinement with panel-focus overlay and stronger marker orientation cues
 - [x] Top navigation utility layer: search, notifications, profile controls
+- [x] Framer Motion interaction layer (IssuePanel transition, AI expand or collapse, filter chip motion)
+- [x] Motion anti-overuse tuning (removed redundant CSS animations and constrained motion emphasis)
 
 ### Global UI Architecture
 

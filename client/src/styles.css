@@ -518,8 +518,7 @@ h3,
 .primary-btn:hover,
 .secondary-btn:hover,
 .ghost-btn:hover,
-.filter-chip:hover,
-.nav-link:hover {
+.filter-chip:hover {
   transform: scale(1.02);
   box-shadow: var(--shadow-soft);
 }
@@ -530,36 +529,6 @@ h3,
 .filter-chip:active,
 .icon-btn:active {
   transform: scale(0.98);
-}
-
-.issue-panel-animate {
-  animation: panelIn 220ms ease;
-}
-
-.issue-list-animated {
-  animation: expandIn 180ms ease;
-}
-
-@keyframes panelIn {
-  from {
-    opacity: 0;
-    transform: translateX(8px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes expandIn {
-  from {
-    opacity: 0;
-    transform: translateY(-4px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
 
 .issue-marker {

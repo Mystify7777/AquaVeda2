@@ -15,7 +15,7 @@ export default function IssuePanel({ issue }) {
   }
 
   return (
-    <div className="issue-panel card issue-panel-animate">
+    <div className="issue-panel card">
       <IssueHeader issue={issue} />
       <IssueDetails issue={issue} />
 
