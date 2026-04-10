@@ -8,8 +8,8 @@ export default function IssuePanel({ issue }) {
   if (!issue) {
     return (
       <div className="issue-panel-empty">
-        <h2>No Issue Selected</h2>
-        <p>Select an issue marker on the map to inspect details and take action.</p>
+        <h2>Select an issue to view details</h2>
+        <p>Click any marker on the map to open context, insights, and actions.</p>
       </div>
     );
   }
@@ -18,8 +18,14 @@ export default function IssuePanel({ issue }) {
     <div className="issue-panel">
       <IssueHeader issue={issue} />
       <IssueDetails issue={issue} />
+
+      <p className="issue-group-label">Insights</p>
       <IssueAISection issue={issue} />
+
+      <p className="issue-group-label">Community</p>
       <IssueCommentsPreview issue={issue} />
+
+      <p className="issue-group-label">Action</p>
       <IssueActions issue={issue} />
     </div>
   );

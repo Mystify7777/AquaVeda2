@@ -36,8 +36,9 @@ export default function IssueCommentsPreview({ issue }) {
       {!loading && !error && items.length > 0 ? (
         <ul className="issue-list">
           {items.map((comment) => (
-            <li key={comment._id}>
-              <strong>{comment.user?.name || "User"}:</strong> {comment.content}
+            <li key={comment._id} className="comment-preview-item">
+              <strong>{comment.user?.name || "User"}:</strong>{" "}
+              <span>{comment.content.length > 110 ? `${comment.content.slice(0, 110)}...` : comment.content}</span>
             </li>
           ))}
         </ul>

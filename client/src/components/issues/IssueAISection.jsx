@@ -6,6 +6,7 @@ export default function IssueAISection({ issue }) {
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState([]);
   const [error, setError] = useState("");
+  const [hasLoaded, setHasLoaded] = useState(false);
 
   const fetchAI = async () => {
     try {
@@ -13,6 +14,7 @@ export default function IssueAISection({ issue }) {
       setError("");
       const response = await getIssueRecommendations(issue.id);
       setData(response.data || []);
+      setHasLoaded(true);
       setOpen(true);
     } catch (err) {
       setError(err.message || "Failed to load suggestions");
@@ -21,16 +23,31 @@ export default function IssueAISection({ issue }) {
     }
   };
 
+  const handleToggle = async () => {
+    if (open) {
+      setOpen(false);
+      return;
+    }
+
+    if (!hasLoaded) {
+      await fetchAI();
+      return;
+    }
+
+    setOpen(true);
+  };
+
   return (
     <section className="issue-section">
       <div className="section-row">
         <h3>AI Suggestions</h3>
-        <button type="button" className="ghost-btn" onClick={fetchAI} disabled={loading}>
-          {loading ? "Loading..." : "Get AI Suggestions"}
+        <button type="button" className="ghost-btn" onClick={handleToggle} disabled={loading}>
+          {loading ? "Fetching suggestions..." : open ? "Hide" : "Show"}
         </button>
       </div>
 
       {error ? <p className="error-text">{error}</p> : null}
+      {!open && !loading ? <p className="panel-empty">Expand to view AI-backed guidance for this issue.</p> : null}
 
       {open && data.length > 0 ? (
         <ul className="issue-list">

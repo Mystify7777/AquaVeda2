@@ -202,6 +202,10 @@ Problem -> Insight -> Collaboration -> Action -> Impact -> Trust
 - [x] Replace map popup-heavy flow with structured `IssuePanel`
 - [x] Deliver 3-column desktop layout: FilterPanel | MapCanvas | IssuePanel
 - [x] Deliver mobile behavior: map + bottom-sheet issue details
+- [x] Refine IssuePanel into action hub (context -> insight -> community -> action)
+- [x] Improve marker UX (hover feedback, selected marker emphasis, severity styling)
+- [x] Upgrade filter UX with active chips and reset
+- [x] Add Explore-level empty and loading states with recovery CTA
 
 ### Global UI Architecture
 

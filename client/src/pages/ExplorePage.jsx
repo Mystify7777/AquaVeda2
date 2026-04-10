@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import FilterPanel from "../components/filters/FilterPanel.jsx";
 import IssuePanel from "../components/issues/IssuePanel.jsx";
 import MapCanvas from "../components/map/MapCanvas.jsx";
 import { getIssueMapData } from "../services/api.js";
 
 export default function ExplorePage() {
+  const navigate = useNavigate();
   const [filters, setFilters] = useState({
     severity: "",
     status: "",
@@ -46,14 +48,22 @@ export default function ExplorePage() {
         </aside>
 
         <main className="explore-map" aria-label="Map workspace">
-          {loading ? <p className="panel-empty">Loading map data...</p> : null}
+          {loading ? <p className="panel-empty map-message">Loading map data...</p> : null}
           {error ? <p className="error-text">{error}</p> : null}
-          {!loading && !error ? (
+          {!loading && !error && issues.length > 0 ? (
             <MapCanvas
               issues={issues}
               selectedIssueId={selectedIssue?.id || ""}
               onSelectIssue={setSelectedIssue}
             />
+          ) : null}
+
+          {!loading && !error && issues.length === 0 ? (
+            <div className="map-empty-state">
+              <h2>No issues found in this area</h2>
+              <p>Try widening your search, changing filters, or report a new issue.</p>
+              <button type="button" className="primary-btn" onClick={() => navigate("/act")}>Report Issue</button>
+            </div>
           ) : null}
         </main>
 
