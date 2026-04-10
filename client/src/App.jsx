@@ -2,14 +2,18 @@ import { Suspense, lazy } from "react";
 import { BrowserRouter, Navigate, Route, Routes, useLocation } from "react-router-dom";
 import { useAuth } from "./contexts/AuthContext.jsx";
 import MainLayout from "./layouts/MainLayout.jsx";
-import ActPage from "./pages/ActPage.jsx";
-import CommunityPage from "./pages/CommunityPage.jsx";
-import ExplorePage from "./pages/ExplorePage.jsx";
-import LearnPage from "./pages/LearnPage.jsx";
-import LoginPage from "./pages/LoginPage.jsx";
-import RegisterPage from "./pages/RegisterPage.jsx";
 
 const DashboardPage = lazy(() => import("./pages/DashboardPage.jsx"));
+const ExplorePage = lazy(() => import("./pages/ExplorePage.jsx"));
+const LearnPage = lazy(() => import("./pages/LearnPage.jsx"));
+const ActPage = lazy(() => import("./pages/ActPage.jsx"));
+const CommunityPage = lazy(() => import("./pages/CommunityPage.jsx"));
+const LoginPage = lazy(() => import("./pages/LoginPage.jsx"));
+const RegisterPage = lazy(() => import("./pages/RegisterPage.jsx"));
+
+function RouteFallback() {
+  return <main className="page-message">Loading page...</main>;
+}
 
 function ProtectedRoute({ children }) {
   const { isAuthenticated, loading } = useAuth();
@@ -29,7 +33,7 @@ function ProtectedRoute({ children }) {
 export default function App() {
   return (
     <BrowserRouter>
-      <Suspense fallback={<main style={{ fontFamily: "system-ui, sans-serif", padding: "2rem" }}>Loading dashboard...</main>}>
+      <Suspense fallback={<RouteFallback />}>
         <Routes>
           <Route path="/" element={<Navigate to="/explore" replace />} />
           <Route path="/login" element={<LoginPage />} />

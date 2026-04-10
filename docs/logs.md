@@ -42,3 +42,5 @@
 [2026-04-10] - Precision Polish - Completed final UI consistency pass with rhythm tuning, density calibration, press-feedback states, map focus overlay, and Dashboard style alignment to Explore
 [2026-04-10] - Motion - Integrated Framer Motion for issue panel transitions, AI accordion reveal, and filter chip enter/exit with subtle hover and tap feedback
 [2026-04-10] - Motion - Applied anti-overuse cleanup by removing duplicate CSS keyframe animations and narrowing motion to purposeful transition zones
+[2026-04-10] - Frontend Perf - Added route-level lazy loading and Vite manual vendor chunking to remove oversized initial bundle warning and improve load distribution
+[2026-04-10] - Frontend Perf - Deferred dashboard chart component loading until analytics section enters viewport, reducing immediate dashboard JS cost

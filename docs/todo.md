@@ -216,6 +216,8 @@ Problem -> Insight -> Collaboration -> Action -> Impact -> Trust
 - [x] Top navigation utility layer: search, notifications, profile controls
 - [x] Framer Motion interaction layer (IssuePanel transition, AI expand or collapse, filter chip motion)
 - [x] Motion anti-overuse tuning (removed redundant CSS animations and constrained motion emphasis)
+- [x] Route-level lazy loading and vendor manual chunking to eliminate oversized initial bundle warning
+- [x] Dashboard chart payload defer: load chart modules only when analytics section enters viewport
 
 ### Global UI Architecture
 
@@ -227,6 +229,7 @@ Problem -> Insight -> Collaboration -> Action -> Impact -> Trust
 	- Act: project navigation
 	- Dashboard: stat links
 - [ ] Add top-nav utility actions: search, notifications, profile menu
+- [ ] Dashboard idle-time prefetch for chart chunks after first dashboard paint
 
 ### Explore (Map-First UX) — Step 1
 

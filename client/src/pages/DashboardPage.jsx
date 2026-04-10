@@ -1,8 +1,9 @@
-import { useMemo, useState } from "react";
-import RoleChart from "../components/dashboard/RoleChart.jsx";
-import StatusBarChart from "../components/dashboard/StatusBarChart.jsx";
+import { Suspense, lazy, useEffect, useMemo, useRef, useState } from "react";
 import { useAuth } from "../contexts/AuthContext.jsx";
 import { getAdminDashboard, getUserDashboard } from "../services/api.js";
+
+const RoleChart = lazy(() => import("../components/dashboard/RoleChart.jsx"));
+const StatusBarChart = lazy(() => import("../components/dashboard/StatusBarChart.jsx"));
 
 const Card = ({ label, value }) => {
   return (
@@ -19,6 +20,8 @@ export default function DashboardPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [dashboard, setDashboard] = useState(null);
+  const [shouldRenderCharts, setShouldRenderCharts] = useState(false);
+  const chartSectionRef = useRef(null);
 
   const canViewAdmin = user?.role === "ADMIN";
 
@@ -52,6 +55,45 @@ export default function DashboardPage() {
   }, [dashboard]);
 
   const cards = mode === "admin" ? adminCards : userCards;
+
+  useEffect(() => {
+    setShouldRenderCharts(false);
+  }, [mode]);
+
+  useEffect(() => {
+    if (!dashboard || mode !== "admin" || !canViewAdmin) {
+      return;
+    }
+
+    if (shouldRenderCharts) {
+      return;
+    }
+
+    const target = chartSectionRef.current;
+    if (!target) {
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setShouldRenderCharts(true);
+          observer.disconnect();
+        }
+      },
+      {
+        root: null,
+        rootMargin: "120px",
+        threshold: 0.15
+      }
+    );
+
+    observer.observe(target);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [dashboard, mode, canViewAdmin, shouldRenderCharts]);
 
   const loadDashboard = async () => {
     try {
@@ -118,13 +160,19 @@ export default function DashboardPage() {
       )}
 
       {dashboard && mode === "admin" && canViewAdmin ? (
-        <section className="dashboard-extra">
+        <section className="dashboard-extra" ref={chartSectionRef}>
           <h2>Analytics Overview</h2>
-          <div className="charts">
-            <RoleChart data={dashboard.roleSplit} />
-            <StatusBarChart title="Issue Status Distribution" data={dashboard.issueStatus} />
-            <StatusBarChart title="Project Progress Overview" data={dashboard.projectStatus} />
-          </div>
+          {shouldRenderCharts ? (
+            <Suspense fallback={<p className="chart-empty">Loading analytics visualizations...</p>}>
+              <div className="charts">
+                <RoleChart data={dashboard.roleSplit} />
+                <StatusBarChart title="Issue Status Distribution" data={dashboard.issueStatus} />
+                <StatusBarChart title="Project Progress Overview" data={dashboard.projectStatus} />
+              </div>
+            </Suspense>
+          ) : (
+            <p className="chart-empty">Scroll to analytics to load chart visualizations.</p>
+          )}
         </section>
       ) : null}
     </main>

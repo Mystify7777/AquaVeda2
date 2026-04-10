@@ -86,6 +86,8 @@ Aquaveda is a geo-intelligent water conservation platform combining knowledge sh
 - Precision polish pass completed with tighter spacing rhythm, readability calibration, interaction press feedback, map focus presence, and Dashboard visual parity with Explore
 - Framer Motion layer added for state-change transitions in Explore (issue selection panel animation, AI section expand/collapse, and filter chip micro-interactions)
 - Motion layer tightened to avoid over-animation by removing redundant CSS keyframe effects and keeping animations scoped to meaningful state changes
+- Frontend bundle profile improved by lazy-loading primary routes and splitting vendor libraries (React, map, charts, motion) into dedicated chunks for faster initial payload delivery
+- Dashboard analytics rendering optimized by deferring chart component module loading until the analytics section enters viewport
 
 ---
 
