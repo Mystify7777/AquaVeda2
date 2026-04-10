@@ -88,7 +88,7 @@ export default function DashboardPage() {
           </select>
         </label>
 
-        <button type="button" className="dashboard-load-btn" onClick={loadDashboard} disabled={loading || !token}>
+        <button type="button" className="primary-btn dashboard-load-btn" onClick={loadDashboard} disabled={loading || !token}>
           {loading ? "Loading..." : "Load dashboard"}
         </button>
       </section>
@@ -98,7 +98,7 @@ export default function DashboardPage() {
       {error ? <p className="error-text">{error}</p> : null}
 
       {dashboard && mode === "user" ? (
-        <section className="dashboard-profile">
+        <section className="dashboard-profile card">
           <h2>{dashboard.profile?.name || "User"}</h2>
           <p>{dashboard.profile?.email || ""}</p>
           <p>

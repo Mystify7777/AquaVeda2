@@ -51,11 +51,14 @@ export default function ExplorePage() {
           {loading ? <p className="panel-empty map-message">Loading map data...</p> : null}
           {error ? <p className="error-text">{error}</p> : null}
           {!loading && !error && issues.length > 0 ? (
-            <MapCanvas
-              issues={issues}
-              selectedIssueId={selectedIssue?.id || ""}
-              onSelectIssue={setSelectedIssue}
-            />
+            <>
+              <MapCanvas
+                issues={issues}
+                selectedIssueId={selectedIssue?.id || ""}
+                onSelectIssue={setSelectedIssue}
+              />
+              <div className={`map-focus-overlay ${selectedIssue ? "active" : ""}`} aria-hidden="true" />
+            </>
           ) : null}
 
           {!loading && !error && issues.length === 0 ? (

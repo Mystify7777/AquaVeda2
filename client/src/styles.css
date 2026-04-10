@@ -282,6 +282,19 @@ h3,
   position: relative;
 }
 
+.map-focus-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 23, 42, 0);
+  transition: background-color 220ms ease;
+  pointer-events: none;
+  z-index: 350;
+}
+
+.map-focus-overlay.active {
+  background: rgba(15, 23, 42, 0.05);
+}
+
 .explore-panel {
   border-left: 1px solid #e2e8f0;
   padding: 16px;
@@ -442,6 +455,7 @@ h3,
   margin-top: var(--space-1);
   line-height: 1.65;
   color: #334155;
+  max-width: 65ch;
 }
 
 .issue-meta-row {
@@ -468,12 +482,13 @@ h3,
 }
 
 .issue-list {
-  margin: 0.6rem 0;
+  margin: var(--space-2) 0 0;
   padding-left: 1rem;
 }
 
 .issue-list li {
-  margin-bottom: 0.35rem;
+  margin-bottom: 0.55rem;
+  line-height: 1.55;
 }
 
 .issue-link-btn {
@@ -482,6 +497,14 @@ h3,
 
 .comment-preview-item {
   line-height: 1.35;
+}
+
+.comment-preview-item span {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  color: #475569;
 }
 
 .issue-actions {
@@ -499,6 +522,14 @@ h3,
 .nav-link:hover {
   transform: scale(1.02);
   box-shadow: var(--shadow-soft);
+}
+
+.primary-btn:active,
+.secondary-btn:active,
+.ghost-btn:active,
+.filter-chip:active,
+.icon-btn:active {
+  transform: scale(0.98);
 }
 
 .issue-panel-animate {
@@ -706,9 +737,9 @@ a {
 .dashboard-toolbar {
   display: grid;
   grid-template-columns: minmax(220px, 1fr) auto;
-  gap: 0.75rem;
+  gap: var(--space-2);
   align-items: end;
-  margin-bottom: 1rem;
+  margin-bottom: var(--space-2);
 }
 
 .dashboard-toolbar label {
@@ -749,22 +780,26 @@ a {
 }
 
 .dashboard-profile {
-  margin-bottom: 1rem;
-  padding: 0.85rem;
+  margin-bottom: var(--space-2);
+  padding: var(--space-2);
   border: 1px solid #cbd5e1;
-  border-radius: 0.5rem;
+  border-radius: var(--radius-card);
   background: #f8fafc;
+  box-shadow: var(--shadow-soft);
 }
 
-.dashboard-profile h2,
+.dashboard-profile h2 {
+  margin: 0;
+}
+
 .dashboard-profile p {
-  margin: 0.2rem 0;
+  margin: var(--space-1) 0 0;
 }
 
 .dashboard-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
-  gap: 0.75rem;
+  gap: var(--space-2);
 }
 
 .dashboard-card {
@@ -777,8 +812,10 @@ a {
 
 .dashboard-card h3 {
   margin: 0;
-  font-size: 0.85rem;
+  font-size: 12px;
   color: #334155;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
 }
 
 .dashboard-card p {
@@ -809,9 +846,10 @@ a {
 
 .chart-box {
   border: 1px solid #cbd5e1;
-  border-radius: 0.5rem;
+  border-radius: var(--radius-card);
   background: #ffffff;
-  padding: 0.75rem;
+  padding: var(--space-2);
+  box-shadow: var(--shadow-soft);
 }
 
 .chart-box h3 {

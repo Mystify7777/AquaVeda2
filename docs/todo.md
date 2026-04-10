@@ -210,6 +210,10 @@ Problem -> Insight -> Collaboration -> Action -> Impact -> Trust
 - [x] Standardize card and button system usage in Explore interaction surfaces
 - [x] Add marker visual identity polish including critical pulse and tooltip guidance
 - [x] Add subtle motion for panel updates, AI disclosure, and interactive controls
+- [x] Precision spacing and typography rhythm audit for Explore and Dashboard
+- [x] Content density calibration for issue description, comments preview, and AI list readability
+- [x] Map presence refinement with panel-focus overlay and stronger marker orientation cues
+- [x] Top navigation utility layer: search, notifications, profile controls
 
 ### Global UI Architecture
 
